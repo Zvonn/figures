@@ -1,4 +1,3 @@
-
 public class GeometricObjectTest {
     public static void main(String[] args) {
         System.out.println("=== МОДЕЛИРОВАНИЕ ГЕОМЕТРИЧЕСКИХ ФИГУР ===\n");
@@ -15,12 +14,6 @@ public class GeometricObjectTest {
         System.out.println("Круг 2 (радиус=5, цвет=красный, заливка=true):");
         System.out.println(circle2);
         System.out.println();
-
-        Circle circle3 = new Circle(3.5, "blue", false);
-        System.out.println("Круг 3 (радиус=3.5, цвет=синий, заливка=false):");
-        System.out.println(circle3);
-        System.out.println();
-
         System.out.println("2. ТЕСТИРОВАНИЕ ПРЯМОУГОЛЬНИКОВ:");
         System.out.println("--------------------------------");
 
@@ -34,28 +27,59 @@ public class GeometricObjectTest {
         System.out.println(rectangle2);
         System.out.println();
 
-        Rectangle rectangle3 = new Rectangle(2.5, 3.5, "yellow", false);
-        System.out.println("Прямоугольник 3 (ширина=2.5, высота=3.5, цвет=желтый, заливка=false):");
-        System.out.println(rectangle3);
+        System.out.println("3. ТЕСТИРОВАНИЕ ТРЕУГОЛЬНИКОВ:");
+        System.out.println("------------------------------");
+
+        try {
+            Triangle triangle1 = new Triangle();
+            System.out.println("Треугольник 1 (по умолчанию - равносторонний):");
+            System.out.println(triangle1);
+            System.out.println();
+        } catch (IllegalArgumentException e) {
+            System.out.println("Ошибка создания треугольника: " + e.getMessage());
+        }
+
+        try {
+            Triangle triangle2 = new Triangle(3.0, 4.0, 5.0, "blue", true);
+            System.out.println("Треугольник 2 (стороны=3,4,5, цвет=синий, заливка=true):");
+            System.out.println(triangle2);
+            System.out.println();
+        } catch (IllegalArgumentException e) {
+            System.out.println("Ошибка создания треугольника: " + e.getMessage());
+        }
+
+        try {
+            Triangle triangle3 = new Triangle(5.0, 5.0, 8.0, "orange", false);
+            System.out.println("Треугольник 3 (стороны=5,5,8, цвет=оранжевый, заливка=false):");
+            System.out.println(triangle3);
+            System.out.println();
+        } catch (IllegalArgumentException e) {
+            System.out.println("Ошибка создания треугольника: " + e.getMessage());
+        }
+
+        System.out.println("4. ТЕСТ С НЕВАЛИДНЫМ ТРЕУГОЛЬНИКОМ:");
+        System.out.println("-----------------------------------");
+        try {
+            Triangle invalidTriangle = new Triangle(1.0, 2.0, 10.0, "black", true);
+            System.out.println(invalidTriangle);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Ошибка: " + e.getMessage());
+        }
         System.out.println();
 
-        System.out.println("3. ДЕМОНСТРАЦИЯ МЕТОДОВ:");
-        System.out.println("-----------------------");
+        System.out.println("5. ДЕМОНСТРАЦИЯ МЕТОДОВ ТРЕУГОЛЬНИКА:");
+        System.out.println("-------------------------------------");
 
-        System.out.println("Информация о круге 2:");
-        System.out.println("Радиус: " + circle2.getRadius());
-        System.out.println("Цвет: " + circle2.getColor());
-        System.out.println("Заливка: " + circle2.isFilled());
-        System.out.println("Площадь: " + String.format("%.2f", circle2.getArea()));
-        System.out.println("Периметр: " + String.format("%.2f", circle2.getPerimeter()));
-        System.out.println();
-
-        System.out.println("Информация о прямоугольнике 2:");
-        System.out.println("Ширина: " + rectangle2.getWidth());
-        System.out.println("Высота: " + rectangle2.getHeight());
-        System.out.println("Цвет: " + rectangle2.getColor());
-        System.out.println("Заливка: " + rectangle2.isFilled());
-        System.out.println("Площадь: " + String.format("%.2f", rectangle2.getArea()));
-        System.out.println("Периметр: " + String.format("%.2f", rectangle2.getPerimeter()));
+        Triangle demoTriangle = new Triangle(6.0, 8.0, 10.0, "purple", true);
+        System.out.println("Демонстрационный треугольник:");
+        System.out.println("Сторона 1: " + demoTriangle.getSide1());
+        System.out.println("Сторона 2: " + demoTriangle.getSide2());
+        System.out.println("Сторона 3: " + demoTriangle.getSide3());
+        System.out.println("Цвет: " + demoTriangle.getColor());
+        System.out.println("Заливка: " + demoTriangle.isFilled());
+        System.out.println("Площадь: " + String.format("%.2f", demoTriangle.getArea()));
+        System.out.println("Периметр: " + String.format("%.2f", demoTriangle.getPerimeter()));
+        System.out.println("Тип: " + demoTriangle.getTriangleType());
+        System.out.println("Прямоугольный: " + demoTriangle.isRightTriangle());
     }
 }
